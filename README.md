@@ -4,9 +4,38 @@ Todos os arquivos usados/criados durante o treinamento HPD.
 
 ## 14/02/2018 - GIT
 
-### Cópia e inciialização do projeto
+Obs.: origin é apelido para o repositório remoto
+
+Abaixo os comandos vistos:
+
+### Incialização do GIT local
+```
+git init
+```
+
+### Adiciona uma URL de GIT remoto ao GIT local
+```
+git remote add origin <URL>
+```
+
+### Incialização do GIT local com adição do GIT remoto e com todos os seus arquivos
 ```
 git clone <URL> <NEW DIRECTORY>
+```
+
+### Lista a URL do repositório remoto e suas branches
+```
+git remote show origin
+```
+
+### Renomeia a referência origin por outro nome
+```
+git remote rename origin <NAME>
+```
+
+### Deleta o GIT remoto para o projeto local
+```
+git remote rm origin
 ```
 
 ### Adição de arquivo
