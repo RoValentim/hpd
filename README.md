@@ -113,6 +113,11 @@ git checkout <Name>
 git diff <branch> <branch>
 ```
 
+### Mostra a diferença entre repositório atual e o remoto em relação ao último "git pull"
+```
+git diff -cached
+```
+
 ### Fazer merge mantendo com o histórico
 ```
 git merge --no-ff aula
@@ -141,6 +146,11 @@ git reset origin/master
 ### Retorna o repositório local para ficar igual ao remoto
 ```
 git reset --hard origin/master
+```
+
+### Retorna a versão antes da alteração de um arquivo
+```
+git reset <FILE>
 ```
 
 ### Mostra todos os Logs
