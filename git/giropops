@@ -1,0 +1,6 @@
+total 1
+drwxrwxrwx   1 user     group           0 Feb 14 10:05 .
+drwxrwxrwx   1 user     group           0 Feb 14 10:01 ..
+drwxrwxrwx   1 user     group           0 Feb 14 10:05 .git
+-rw-rw-rw-   1 user     group          66 Feb 14 10:01 README.md
+-rw-rw-rw-   1 user     group           0 Feb 14 10:06 giropops
