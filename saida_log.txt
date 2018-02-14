@@ -1,0 +1,15 @@
+* 9fef4d9 Atualização do README
+*   86dbaa0 Merge branch 'aula'
+|\  
+| * 7a1964e Adição dos comandos para exercícios de aula
+|/  
+* 2bcc36e Atualização do README
+*   23aefd2 Merge branch 'aula'
+|\  
+| * adb2847 Adicionado o strigus
+|/  
+* 9322ad8 Removendo strigus
+* 1046c02 Adicionando o STRIGUS
+* ae329b2 Adicionando o arquivo Giropops
+* 69253c8 Adicionando o arquivo Giropops
+* ddbd61a Initial commit
