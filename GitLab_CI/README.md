@@ -1,4 +1,4 @@
-# 15/02/2018 - GitLab C.I.
+# 16/02/2018 - GitLab C.I.
 
 GitLab: Ferramenta para gerenciamento de repositórios GIT.
 Funciona baseado em serviços, a qual utiliza vários componentes para isso, como por exemplo, o Chef para própria configuração.
