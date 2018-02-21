@@ -174,6 +174,7 @@ docker volume rm <CONTAINER NAME>
 
 docker image ls
 docker image rm
+docker image history
 
 docker pull <IMAGE NAME>
 Faz o download da imagem sem instalar
@@ -184,3 +185,76 @@ Faz o download da imagem sem instalar
 
 stress para stressar a vm
 free dentro da vm docker mostra o total do host, por isso usar o stats no lugar
+
+
+
+
+mkdir dockerfiles
+cd dockerfiles
+mkdir 1
+cd 1
+vim Dockerfile
+
+FROM ubuntu
+MAINTAINER rodrigo.valentim@agilitynetworks.com.br
+
+RUN apt-get update \
+	&& apt-get install -y nginx \
+	&& apt-get clean
+
+COPY index.html /var/www/html/
+
+ENV rodrigo rules
+
+VOLUME /var/www/html
+
+ENTRYPOINT /usr/sbin/nginx -g 'daemon off;'
+
+EXPOSE 80
+
+
+
+OU
+
+FROM nginx
+MAINTAINER rodrigo.valentim@agilitynetworks.com.br
+ADD
+EXPOSE 80
+
+
+
+
+index.html
+Minha primeira imagem
+
+
+docker build -t meu_nginx_ubuntu:1.0 .
+ou
+docker build -t meu_nginx_ubuntu:1.0 -f <DOCKER FILE NAME>
+
+docker container run -d -p 8080:80 meu_nginx_ubuntu:1.0
+
+
+
+
+FROM ubuntu
+MAINTAINER rodrigo.valentim@agilitynetworks.com.br
+LABEL maintainer="rodrigo.valentim@agilitynetworks.com.br"
+LABEL version="1.0"
+LABEL description="Meu primeiro apache"
+
+RUN apt-get update \
+	&& apt-get install -y apache2 \
+	&& apt-get clean
+
+ADD index.html /var/www/html
+ENV rodrigo rules
+VOLUME /var/www/html
+USER root
+WORKDIR /var/www/html
+EXPOSE 80
+CMD /usr/sbin/apachectl -D FOREGROUND
+
+
+docker build -t meu_apache_ubuntu:1.0 .
+docker container run -d -p 8888:80 meu_apache_ubuntu:1.0
