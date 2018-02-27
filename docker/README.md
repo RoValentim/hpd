@@ -1,6 +1,5 @@
 # 21/02/2018 - Docker
 
-
 ## Instalação
 ```
 curl -fsSL https://get.docker.com | bash
@@ -30,11 +29,13 @@ docker container run -ti debian:8
 docker container run -ti ubuntu:14.04
 ```
 
-Onde
+Onde:
+
 docker container run -ti nginx (nesse caso conecta direto no processo do nginx ao invés do terminal, ou seja, o nginx fica em primeiro plano)
 docker container run -d nginx (roda como deamon)
 
--ti junto com run significa que vai ter terminal e interatividade, ou seja, vai acessar assim que criar e/ou quando quiser
+-ti significa que vai ter terminal e interatividade, ou seja, vai acessar a VM assim que criar e/ou quando quiser, mas tendo o nginx em primeiro plano (sem terminal)
+-d apenas o daemon
 
 ### Lista os containers ativos
 ```
