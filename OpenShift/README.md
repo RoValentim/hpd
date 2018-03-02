@@ -8,7 +8,7 @@ Usar a versão 3.7.0, antes de atualizar, sempre gerar novo ambiente e testar tu
 ```
 wget https://github.com/openshift/origin/releases/download/v3.7.0/openshift-origin-server-v3.7.0-7ed6862-linux-64bit.tar.gz
 yum install yum-utils -y
-yum-config-manager -add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum-config-manager --enable rhui-REGION-rhel-server-extras
 yum install telnet git docker-ce epel-release -y
 service docker start
@@ -261,6 +261,110 @@ https://docs.openshift.com/enterprise/3.1/dev_guide/deployments.html
 https://paasfinder.org
 https://docs.openshift.com/enterprise/3.0/dev_guide/templates.html
 
+
+
+
+
+# 02/03/2018 - OpenShift Client Web
+Subir com metrics
+```
+oc cluster up --routing-suffix='35.231.119.29 .nip.io' --public-hostname='35.231.119.29 ' --metrics=true
+```
+
+## Webhook
+Sempre usar o content-type json
+Dependendo da versão do OpenShift, o secret já vem na URL, se não vier, ele fica disponível
+```
+```
+
+## Autoscaling
+Sempre usar o content-type json
+Dependendo da versão do OpenShift, o secret já vem na URL, se não vier, ele fica disponível
+```
+```
+## Exercicio
+```
+Fluxo
+  Start do Pipeline
+    Stage de Pre-build
+      Defina steps de pre-build
+    Stage de Testes
+      Defina steps de testes(ex.: echo "aplicando testes...")
+    Stage de Deploy
+      Criar um projeto no openshift com o nome agility-gtw-pag
+      Criar uma app via pipeline, Jenkins ou GitLab C.I, com o nome pagamento-restful-api usando o codigo fonte do seu repo
+      Exponha a rota deste service do Openshift
+      Mostre no log do C.I a descrição deste service
+      Mostre no log do C.I o status deste projeto no Openshift
+  Fim do Pipeline
+```
+
+
+Ir ao GitHub e criar um projeto
+Ir ao Jenkins e fazer CI desse projeto
+Ir ao OpenShift e criar aplicação para esse projeto
+Ir ao Jenkins e configurar no build para chamar o OpenShift Client para fazer build
+Testar a URL exposta pelo OpenShift
+```
+Máquina local
+
+git clone https://github.com/RoValentim/agility-gtw-pag.git agility-gtw-pag
+
+
+
+Máquina 2 (Jenkins)
+
+- Terminal
+yum update
+yum install wget yum-utils -y
+wget https://github.com/openshift/origin/releases/download/v3.7.0/openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit.tar.gz
+tar -zxvf openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit.tar.gz
+mv openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit /opt
+cd /opt/openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit
+export PATH=$(pwd):$PATH
+
+wget https://github.com/openshift/origin/releases/download/v3.7.0/openshift-origin-server-v3.7.0-7ed6862-linux-64bit.tar.gz
+yum-config-manager -add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum-config-manager -add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum-config-manager --enable rhui-REGION-rhel-server-extras
+yum install docker-ce epel-release -y
+docker --version
+yum update
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+yum install java-1.8.0-openjdk jenkins -y
+/etc/init.d/jenkins start
+cat /var/log/jenkins/jenkins.log
+
+- Jenkins
+Acessa a URL: http://35.231.73.41:8080/
+Conectar usando o token do log
+Instalar plugins: Chuck Norris, Dashboard View, Mission Control, Build Monitor View, Blue Ocean
+Conectar ao GitHub usando o token: 23e1271f1ec38ba1a56740face0b731239df8e9d
+Usar a repo: https://github.com/RoValentim/agility-gtw-pag.git
+Configurar Pipeline com o nome pagamento-restful-api:
+Stage de Pre-build - Message
+Stage de Testes - Script: echo "aplicando testes..."
+Stage de Deploy - Scripts para: /opt/openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit/oc login https://35.231.119.29:8443 --username=develop --password=' ' --insecure-skip-tls-verify=true; /opt/openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit/oc project agility-gtw-pag; /opt/openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit/oc start-build agility-gtw-pag; /opt/openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit/oc describe service; /opt/openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit/oc status
+
+
+
+Máquina OpenShift
+
+- Cliente Web
+Acessar a URL: https://35.231.119.29:8443
+Usuário develop com qualquer senha
+Criar um projeto com o nome agility-gtw-pag
+Criar uma aplicação PHP dentro do projeto agility-gtw-pag
+Usar a repo: https://github.com/RoValentim/agility-gtw-pag.git
+```
+
+
+
+https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks
+https://docs.openshift.com/container-platform/3.5/dev_guide/builds/triggering_builds.html
+http://deis.com
 
 
 
