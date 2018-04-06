@@ -98,7 +98,7 @@ git fetch origin
 git branch
 ```
 
-### Cria uma nova branch
+### Cria uma nova branch local
 ```
 git branch <Name>
 ```
@@ -106,6 +106,11 @@ git branch <Name>
 ### Mudança de branch
 ```
 git checkout <Name>
+```
+
+### Cria uma nova branch local e faz o checkout para ela
+```
+git checkout -b <Name>
 ```
 
 ### Mostra a diferença entre duas branches
@@ -126,6 +131,14 @@ git merge --no-ff aula
 ### Fazer merge sem o histórico
 ```
 git merge aula
+```
+
+### Fazer merge entre duas branches locais
+```
+git checkout branch_a
+git pull
+git checkout branch_b
+git merge branch_a
 ```
 
 ### Deleta uma branch
