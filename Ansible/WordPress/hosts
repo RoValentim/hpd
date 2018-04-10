@@ -1,0 +1,13 @@
+[fsociety]
+elliot-01
+elliot-02
+elliot-03
+
+[webserver]
+elliot-02
+
+[wordpress]
+CENTOS
+
+[db]
+elliot-03
