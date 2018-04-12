@@ -63,7 +63,7 @@ vim /etc/prometheus/prometheus.yml
 global:
   scrape_interval: 15s
 
-scrap_configs:
+scrape_configs:
   - job_name: 'prometheus'
     scrape_interval: 5s
     static_configs:
