@@ -101,3 +101,14 @@ ExecStart=/usr/local/bin/prometheus \
 [Install]
 WantedBy=multi-user.target
 ```
+
+## Ajusta o usuário para rodar o seriço sem problema
+```
+chown -R prometheus:prometheus /var/lib/prometheus
+```
+
+## Atualiza o sistema para aceitar o serviço do Prometheus
+```
+systemctl daemon-reload
+systemctl start prometheus
+```
