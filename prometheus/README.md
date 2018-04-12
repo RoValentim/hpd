@@ -182,6 +182,9 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ['localhost:9100','10.142.0.19:9100']
+#        labels:
+#	  type: monitoringOS
+
 ```
 
 ## Restartar o Prometheus para utilizar nova configuração
@@ -246,3 +249,46 @@ systemctl daemon-reload
 systemctl start node_exporter
 systemctl enable node_exporter
 ```
+
+## Adiciona permissão de acesso ao Prometheus
+Instalação de servidor web para proxy e configuração de usuário para autenticação
+```
+yum install httpd-tools
+yum install nginx
+htpasswd -c /etc/nginx/.htpasswd valentim
+```
+
+## Configuração do Nginx para proxy do Prometheus
+vim /etc/nginx/conf.d/prometheus
+```
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+
+	index index.html index.htm;
+
+	server_name _;
+
+	location / {
+		auth_basic "Prometheus server authentication";
+		auth_basic_user_file /etc/nginx/.htpasswd;
+		proxy_pass http://localhost:9090;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection 'upgrade';
+		proxy_set_header Host $host;
+		proxy_cache_bypass $http_upgrade;
+	}
+}
+```
+
+## inicialização do servidor web
+```
+systemctl daemon-reload
+systemctl start nginx
+systemctl enable nginx
+```
+
+Caso após acessar o site pela porta 80 não funcione, deve-se verificar o firewall da máquina e desabilitar o SELinux.
