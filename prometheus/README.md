@@ -55,3 +55,17 @@ chown -R prometheus:prometheus /etc/prometheus
 ```
 rm -rf prometheus-2.0.0.linux-amd64 prometheus-2.0.0.linux-amd64.tar.gz
 ```
+
+## Criação de arquivo de Configuração
+vim /etc/prometheus/prometheus.yml
+
+```
+global:
+  scrape_interval: 15s
+
+scrap_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+```
