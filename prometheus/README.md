@@ -111,4 +111,55 @@ chown -R prometheus:prometheus /var/lib/prometheus
 ```
 systemctl daemon-reload
 systemctl start prometheus
+systemctl enable prometheus
 ```
+
+## Download do Coletor de Métricas
+```
+curl -LO https://github.com/prometheus/node_exporter/releases/download/v0.15.1/node_exporter-0.15.1.linux-amd64.tar.gz
+```
+
+## Descompactação do Coletor de Métricas
+```
+tar -xzvf node_exporter-0.15.1.linux-amd64.tar.gz
+```
+
+## Ajuste nos diretórios
+```
+cp node_exporter-0.15.1.linux-amd64/node_exporter /usr/local/bin
+```
+
+## Ajuste nas Permissões
+```
+chown node_exporter:node_exporter /usr/local/bin/node_exporter
+```
+
+## Limpeza de aquivos desnecessários
+```
+rm -fr node_exporter-0.15.1.linux-amd64 node_exporter-0.15.1.linux-amd64.tar.gz
+```
+
+## Criação de arquivo de Configuração
+vim /etc/systemd/system/node_exporter.service
+
+```
+[Unit]
+Description=Node Explorer
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=node_exporter
+Group=node_exporter
+Type=simple
+ExecStart=/usr/local/bin/node_exporter
+
+[Install]
+WantedBy=multi-user.target
+```
+
+## Atualiza o sistema para aceitar o serviço do Node Exporter
+```
+systemctl daemon-reload
+systemctl start prometheus
+systemctl enable prometheus
