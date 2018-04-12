@@ -69,3 +69,12 @@ scrap_configs:
     static_configs:
       - targets: ['localhost:9090']
 ```
+
+## Ajustar a configuração do arquivo de configuração
+```
+chown -R prometheus:prometheus /etc/prometheus/prometheus.yml
+```
+## Executa o Prometheus
+```
+prometheus --config.file /etc/prometheus/prometheus.yml --storage.tsdb.path /var/lib/prometheus --web.console.templates /etc/prometheus/consoles --web.console.libraries /etc/prometheus/console_libraries
+```
