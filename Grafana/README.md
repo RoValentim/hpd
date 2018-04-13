@@ -159,3 +159,17 @@ chown prometheus:prometheus /etc/prometheus/alert.rules
 ```
 systemctl restart prometheus
 ```
+
+# Instalação do Grafana
+```
+yum install https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-5.0.4-1.x86_64.rpm
+systemctl daemon-reload
+systemctl enable grafana-server
+systemctl start grafana-server
+```
+
+Depois é só acessar na porta 3000 com usuário e senha Admin.
+
+Exercícios:
+- Instalar o projeto do giropops:
+- URL: https://github.com/badtuxx/giropops-monitoring
